@@ -6,28 +6,34 @@ import (
 )
 
 const (
-	fileName  = "file.txt"
-	chunkSize = 4
+	fileName1 = "testfiles/longtext1.txt"
+	fileName2 = "testfiles/longtext3.txt"
+	chunkSize = 13
 )
 
 func main() {
-	file, err := ioutil.ReadFile(fileName)
+	// Read file 1
+	file1, err := ioutil.ReadFile(fileName1)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(string(file))
 
-	chunk1 := New(file, chunkSize)
-	chunk2 := New(file, chunkSize)
-
-	isEqual, diffs, err := chunk1.Diff(chunk2)
+	// Read file 2
+	file2, err := ioutil.ReadFile(fileName2)
 	if err != nil {
 		panic(err)
 	}
-	if isEqual {
-		fmt.Println("True")
-	} else {
-		fmt.Printf("False")
-		fmt.Println(diffs)
+
+	// Create chunkers
+	chunker1 := New(file1, chunkSize)
+	chunker2 := New(file2, chunkSize)
+
+	// Diffing
+	diffs, err := chunker1.Diff(chunker2)
+	if err != nil {
+		panic(err)
 	}
+
+	// Print unequal chunks' indexes
+	fmt.Println(diffs)
 }
