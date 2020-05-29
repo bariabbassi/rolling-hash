@@ -1,5 +1,5 @@
-# Rolling Hash
-Rolling Hash :recycle: based file diffing
+# :recycle: Rolling Hash
+Rolling Hash based file diffing
 
 ## How to run the project
 - Required: ```Go 1.11+```
